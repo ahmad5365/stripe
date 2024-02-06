@@ -1,6 +1,7 @@
 Documents related to Stripe web services
 
 Initially, a brief explanation is provided to understand the versions of the web services. Considering the large number of clients and the inability to force future updates, a versioning structure is required so that if changes need to be made to a specific endpoint, we can do so without any specific issues. This necessity has been observed in our team's web services as well, and we utilize versioning techniques. Currently, the above descriptions relate to version number 1 of the Customer endpoint.
+
 Purpose: Manages customer information, including creating, updating, and deleting customers.
 Endpoints: Provides endpoints for creating, retrieving, updating, and deleting customers.
 Data Formats: Data is typically exchanged in JSON format.
