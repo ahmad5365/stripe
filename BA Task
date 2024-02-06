@@ -1,0 +1,102 @@
+Documents related to Stripe web services
+
+Initially, a brief explanation is provided to understand the versions of the web services. Considering the large number of clients and the inability to force future updates, a versioning structure is required so that if changes need to be made to a specific endpoint, we can do so without any specific issues. This necessity has been observed in our team's web services as well, and we utilize versioning techniques. Currently, the above descriptions relate to version number 1 of the Customer endpoint.
+
+The necessary address to access it is as follows:
+
+POST/v1/customers
+POST/v1/customers/:id
+GET/v1/customers/:id
+GET/v1/customers
+DELETE/v1/customers/:id
+GET/v1/customers/search
+
+POST/v1/customers:
+
+In this section, we store customer information in the database.
+
+The model you see below is a sample JSON for better understanding.
+
+{
+  "id": "cus_NffrFeUfNV2Hib",
+  "object": "customer",
+  "address": null,
+  "balance": 0,
+  "created": 1680893993,
+  "currency": null,
+  "default_source": null,
+  "delinquent": false,
+  "description": null,
+  "discount": null,
+  "email": "jennyrosen@example.com",
+  "invoice_prefix": "0759376C",
+  "invoice_settings": {
+    "custom_fields": null,
+    "default_payment_method": null,
+    "footer": null,
+    "rendering_options": null
+  },
+  "livemode": false,
+  "metadata": {},
+  "name": "Jenny Rosen",
+  "next_invoice_sequence": 1,
+  "phone": null,
+  "preferred_locales": [],
+  "shipping": null,
+  "tax_exempt": "none",
+  "test_clock": null
+}
+
+Here, personal information is received to complete the customer registration process, so that after the validation process, the received items are stored in the system.
+
+POST/v1/customers/:id:
+
+This endpoint is used to edit a customer, modifying only the items we provide.
+
+The model used below is an example of it for better understanding.
+
+{
+  "id": "cus_NffrFeUfNV2Hib",
+  "object": "customer",
+  "address": null,
+  "balance": 0,
+  "created": 1680893993,
+  "currency": null,
+  "default_source": null,
+  "delinquent": false,
+  "description": null,
+  "discount": null,
+  "email": "jennyrosen@example.com",
+  "invoice_prefix": "0759376C",
+  "invoice_settings": {
+    "custom_fields": null,
+    "default_payment_method": null,
+    "footer": null,
+    "rendering_options": null
+  },
+  "livemode": false,
+  "metadata": {
+    "order_id": "6735"
+  },
+  "name": "Jenny Rosen",
+  "next_invoice_sequence": 1,
+  "phone": null,
+  "preferred_locales": [],
+  "shipping": null,
+  "tax_exempt": "none",
+  "test_clock": null
+}
+
+GET/v1/customers/:id and GET/v1/customers and GET/v1/customers/search:
+
+For this purpose, we have three endpoints, one for retrieving information about a customer, another for retrieving all customers.
+
+DELETE/v1/customers/:id:
+
+There are times when it is necessary to delete information, and in such cases, we use the method below to delete only a specific customer.
+
+Suggestions:
+
+To prevent our data from being edited in multiple places and to have Endpoint generation occur instantly, it is better to use our Swagger documentation so that all summaries are published and users have all the documentation related to the Endpoints. For example, in dot net, the help-pages package is used.
+
+Using multiple GET Endpoints to retrieve information is not very efficient and only increases the workload of the programmer. Instead of them, we can have all the information retrieval done through a single Endpoint and only receive the desired information by providing specific parameters. If the parameters are empty, all customers are retrieved, and if a parameter is provided, only customers meeting the condition are returned.
